@@ -1012,6 +1012,7 @@ config MACH_TRIVIALMIPS
 	select SYS_SUPPORTS_LITTLE_ENDIAN
 	select USE_OF
 	select XILINX_INTC
+	select CPU_NO_LOAD_STORE_LR
 	help
 	  This option enables support for TrivialMIPS/NonTrivialMIPS
 
@@ -1433,7 +1434,7 @@ config CPU_LOONGSON1C
 config CPU_MIPS32_R1
 	bool "MIPS32 Release 1"
 	depends on SYS_HAS_CPU_MIPS32_R1
-	select CPU_HAS_PREFETCH
+	# select CPU_HAS_PREFETCH
 	select CPU_SUPPORTS_32BIT_KERNEL
 	select CPU_SUPPORTS_HIGHMEM
 	help
