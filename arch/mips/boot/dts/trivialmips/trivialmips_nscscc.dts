@@ -56,7 +56,7 @@
 		serial0: serial@1fd02000 {
 			device_type = "serial";
 			compatible = "ns16550a";
-			reg = <0x1fd02000 0x1000>;
+			reg = <0x1fd02000 0x2000>;
 			reg-offset = <0x1000>;
 			reg-io-width = <4>;
 			reg-shift = <2>;
@@ -121,7 +121,7 @@
 		axi_ethernetlite: ethernet@1c000000 {
 			compatible = "xlnx,xps-ethernetlite-3.00.a";
 			device_type = "network";
-			mac-address = [19 98 00 01 00 29];
+			mac-address = [18 98 00 01 00 29];
 			phy-handle = <&phy0>;
 			reg = <0x1c000000 0x10000>;
 			xlnx,duplex = <0x1>;
