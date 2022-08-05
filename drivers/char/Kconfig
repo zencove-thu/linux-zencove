@@ -7,6 +7,12 @@ menu "Character devices"
 
 source "drivers/tty/Kconfig"
 
+config NT35510
+	bool "NT35510 support"
+	default n
+	help
+	  Say Y if you want to support NT35510
+
 config TTY_PRINTK
 	tristate "TTY driver to output user messages via printk"
 	depends on EXPERT && TTY
