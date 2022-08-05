@@ -1994,6 +1994,16 @@ config FB_XILINX
 	  framebuffer. ML300 carries a 640*480 LCD display on the board,
 	  ML403 uses a standard DB15 VGA connector.
 
+config FB_XILINX_ACCL
+	tristate "Xilinx frame buffer support (with hardware acceleration)"
+	depends on FB && MACH_TRIVIALMIPS
+	select FB_CFB_FILLRECT
+	select FB_CFB_COPYAREA
+	select FB_CFB_IMAGEBLIT
+	help
+	  Include support for the Xilinx Frambuffer with hardware
+	  acceleration support (written by shankerwangmiao)
+
 config FB_GOLDFISH
 	tristate "Goldfish Framebuffer"
 	depends on FB
