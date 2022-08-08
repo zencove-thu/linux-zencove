@@ -544,21 +544,26 @@ static ssize_t nt35510_write(struct file *file, const char __user *buf,
 		ret = -EFAULT;
 	} else {
 		int i;
+		int pp = 0;
 		ret = 0;
-		nt35510_seek_point(drvdata, p % drvdata->xres,
+		while(count > 0) {
+			int writecnt = drvdata->xres - (p % drvdata->xres);
+			nt35510_seek_point(drvdata, p % drvdata->xres,
 				p / drvdata->xres);
-		if (count > 0) {
 			nt35510_out32(drvdata, NT35510_INST_OFFSET, 0x2C00);
-			for (i = 0; i < count; i++) {
+			if(writecnt > count)
+				writecnt = count;
+			for (i = 0; i < writecnt; i++) {
 				nt35510_out32(drvdata, NT35510_DATA_OFFSET,
-						data[i]);
+						data[i + pp]);
 			}
-			ret = BYTES_PER_PIXEL * count;
-		} else {
-			ret = 0;
+			count -= writecnt;
+			p += writecnt;
+			pp += writecnt;
+			ret += BYTES_PER_PIXEL * writecnt;
+			file->f_pos += BYTES_PER_PIXEL * writecnt;
+			drvdata->curr_off += BYTES_PER_PIXEL * writecnt;
 		}
-		file->f_pos += BYTES_PER_PIXEL * count;
-		drvdata->curr_off += BYTES_PER_PIXEL * count;
 	}
 	kfree(data);
 	dev_dbg(drvdata->device, "nt35510_write: ret=%d", ret);
