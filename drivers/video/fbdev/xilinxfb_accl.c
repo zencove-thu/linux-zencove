@@ -42,6 +42,8 @@
 
 #define DRIVER_NAME		"xilinxfb_accl"
 
+#define pr_warning(fmt, ...) \
+	printk(KERN_WARNING pr_fmt(fmt), ##__VA_ARGS__)
 
 /*
  * Xilinx calls it "TFT LCD Controller" though it can also be used for
